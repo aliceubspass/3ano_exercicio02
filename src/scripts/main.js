@@ -1,9 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('form-sorteador').addEventListener('submit', evento => {
+    const form = document.querySelector('#form-sorteador');
+    const resultado = document.querySelector('.resultado');
+    const resultadoValor = document.querySelector('#resultado-valor');
+ 
+    function sortearNumero(max) {
+        return Math.floor(Math.random() * max) + 1;
+    }
+ 
+    form.addEventListener('submit', (evento) => {
         evento.preventDefault();
-        let numeroMaximo = parseInt(document.getElementById('numero-maximo').value);
-        let numeroAleatorio = Math.floor(Math.random() * numeroMaximo) + 1;
-        document.getElementById('resultado-valor').innerText = numeroAleatorio;
-        document.querySelector('.resultado').style.display = 'block';
+        const numeroMaximo = parseInt(document.querySelector('#numero-maximo').value);
+        if (!isNaN(numeroMaximo) && numeroMaximo > 0) {
+            resultadoValor.innerText = sortearNumero(numeroMaximo);
+            resultado.style.display = 'block';
+        } else {
+            alert("Por favor, insira um número válido.");
+        }
     });
 });
